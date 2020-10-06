@@ -3,9 +3,18 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "./CalendarFormat.css";
 import "./Calendar.css"
+import { useComponentVisible } from '../Utils/OutsideClickHook'
+
+
 const localizer = momentLocalizer(moment);
 
 function CalendarDisplayed() {
+    const {
+        ref,
+        isComponentVisible,
+        setIsComponentVisible
+    } = useComponentVisible(false);
+
     const state = {
         events: [
             {
@@ -24,7 +33,7 @@ function CalendarDisplayed() {
 
     console.log(moment().day())
     return (
-        <div className="App">
+        <div className="CalendarPage">
             <div className="CalendarHolder">
                 <Calendar
                     localizer={localizer}
@@ -35,10 +44,11 @@ function CalendarDisplayed() {
                     views={["month", "week"]}
                     onSelectEvent={event => {
                         setOpen(event)
+                        setIsComponentVisible(true)
                     }}
                 />
             </div>
-            {open.title ? <div className="modal"> <div className="infoArea"> <h1 className="X" onClick={() => { setOpen({}) }}>X</h1> <h1>{open.title}</h1> </div></div> : null}
+            {isComponentVisible ? <div className="modal"> <div ref={ref} className="infoArea"> <h1 className="X" onClick={() => { setOpen({}); setIsComponentVisible(false) }}>X</h1> <h1>{open.title}</h1> </div></div> : null}
         </div>
     );
 }
