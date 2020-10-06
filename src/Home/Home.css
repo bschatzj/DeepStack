@@ -1,0 +1,20 @@
+.HomePage{
+    margin: 0;
+    margin-top: 10vh;
+
+}
+
+.Logo{
+    width: 30vw;
+    margin-left: 30vw;
+    height: auto;
+    padding: 2vw;
+}
+
+.Welcome{
+    text-align: center;
+    margin: 0;
+    font-family: 'Metamorphous', cursive;
+    font-size: 4rem;
+    text-decoration: underline;
+}
