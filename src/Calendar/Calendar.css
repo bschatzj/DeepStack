@@ -1,0 +1,45 @@
+.modal{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.438);
+    z-index: 10;
+    transition: all 2s ease;
+}
+
+#closed{
+    opacity: 0;
+}
+
+.infoArea{
+    width: 70%;
+    height: 70%;
+    margin-top: 5%;
+    padding: 2.5%;
+    background-color: white;
+}
+
+.X{
+    width: 2rem;
+    margin: 0;
+    font-size: 4rem;
+    transition: all 1s ease;
+    position: fixed;
+}
+
+.X:hover{
+    color: yellow;
+    -webkit-transform: scale(1.4); 
+    cursor: pointer;
+}
+
+.CalendarHolder{
+    width: 80vw;
+    margin-left: 10vw;
+    margin-top: 10vh;
+    height: 80vh;
+}
