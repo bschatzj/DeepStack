@@ -34,6 +34,15 @@ function CalendarDisplayed() {
     console.log(moment().day())
     return (
         <div className="CalendarPage">
+
+
+            <div>
+                <h1 className="EventTitle">Events</h1>
+                <h1>Day:</h1>
+                <h1>Time:</h1>
+                <p>Description:</p>
+            </div>
+
             <div className="CalendarHolder">
                 <Calendar
                     localizer={localizer}
