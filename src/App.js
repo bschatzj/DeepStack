@@ -4,7 +4,7 @@ import Calendar from './Calendar/Calander'
 import Header from './Header/Header'
 import { Route, Switch, useLocation } from "react-router-dom";
 import Home from './Home/Home'
-
+import Gallery from './Gallery/Gallery'
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
       <Header />
       <Route path="/home" component={Home} />
       <Route path="/calendar" component={Calendar} />
+      <Route path="/gallery" component={Gallery} />
     </div>
   );
 }
