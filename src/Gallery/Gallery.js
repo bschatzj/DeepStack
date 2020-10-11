@@ -9,21 +9,29 @@ export default function Carosel() {
     const images = [
         {
             original: 'https://picsum.photos/id/1018/1000/600/',
+            originalTitle: "HI HI HI",
+            description: "gdfbudvbndfvdf nfdjbnfdkjn  fdnbjfdnk dfn jfdnkfdn ",
+
             thumbnail: 'https://picsum.photos/id/1018/1000/600/',
         },
         {
             original: 'https://picsum.photos/id/1015/1000/600/',
+            originalTitle: "HI HI HI",
+            description: "gdfbudvbndfvdf nfdjbnfdkjn  fdnbjfdnk dfn jfdnkfdn ",
             thumbnail: 'https://picsum.photos/id/1018/1000/600/',
         },
         {
             original: 'https://picsum.photos/id/1019/1000/600/',
+            originalTitle: "HI HI HI",
+            description: "gdfbudvbndfvdf nfdjbnfdkjn  fdnbjfdnk dfn jfdnkfdn ",
             thumbnail: 'https://picsum.photos/id/1018/1000/600/',
         },
     ];
 
     return (
         <div className="Gallery">
-            <ImageGallery items={images}
+            <ImageGallery
+                items={images}
                 showPlayButton={false}
                 height={"70vh"} />
         </div>
