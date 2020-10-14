@@ -15,18 +15,19 @@ function CalendarDisplayed() {
         setIsComponentVisible
     } = useComponentVisible(false);
 
+    console.log(new Date(2020, 1, 14, 14))
+
     const state = {
         events: [
             {
                 start: moment().toDate(),
-                starttime: "12pm",
-                endTime: "3pm",
-                end: moment()
-                    .toDate(),
+                end: new Date(2021, 1, 14, 14),
                 title: "Some title",
             }
         ]
     };
+
+    console.log(state.events)
 
     const [open, setOpen] = useState({})
 

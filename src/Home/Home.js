@@ -55,7 +55,6 @@ export default function Home() {
                 setPlayers([...players, signingUp])
                 console.log(res)
             })
-            .then(setPlayers([...players, signingUp]))
             .catch(err => {
                 console.log(err)
             })
@@ -96,8 +95,10 @@ export default function Home() {
                             <h1 className="GameTitle">1-2 NL Holdem</h1>
                             <button onClick={() => { handleJoin("1-2 NL") }} className="ListButton">Get on List</button>
                         </div>
-                        {players.filter(players => players.GameName == "1-2 NL").map(player => (
-                            <h1>{player.DisplayName}</h1>
+                        {players.filter(players => players.GameName == "1-2 NL" || players.game == "1-2 NL").map(player => (
+                            <>
+                                {player.DisplayName ? <h1>{player.DisplayName}</h1> : <h1>{player.name}</h1>}
+                            </>
                         ))}
                     </div>
                     <div className="Game">
@@ -105,8 +106,11 @@ export default function Home() {
                             <h1 className="GameTitle">2-5 NL Holdem</h1>
                             <button onClick={() => { handleJoin("2-5 NL") }} className="ListButton">Get on List</button>
                         </div>
-                        {players.filter(players => players.GameName == "2-5 NL").map(player => (
-                            <h1>{player.DisplayName}</h1>
+                        {players.filter(players => players.GameName == "2-5 NL" || players.game == "2-5 NL").map(player => (
+                            <>
+                                {player.DisplayName ? <h1>{player.DisplayName}</h1> : <h1>{player.name}</h1>}
+
+                            </>
                         ))}
                     </div>
                     <div className="Game">
@@ -114,8 +118,11 @@ export default function Home() {
                             <h1 className="GameTitle">2-2 PLO</h1>
                             <button onClick={() => { handleJoin("2-2 PLO") }} className="ListButton">Get on List</button>
                         </div>
-                        {players.filter(players => players.GameName == "2-2 PLO").map(player => (
-                            <h1>{player.DisplayName}</h1>
+                        {players.filter(players => players.GameName == "2-2 PLO" || players.game == "2-2 PLO").map(player => (
+                            <>
+                                {player.DisplayName ? <h1>{player.DisplayName}</h1> : <h1>{player.name}</h1>}
+
+                            </>
                         ))}
                     </div>
                 </div>
