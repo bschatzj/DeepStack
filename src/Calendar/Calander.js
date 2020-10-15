@@ -4,7 +4,8 @@ import moment from "moment";
 import "./CalendarFormat.css";
 import "./Calendar.css"
 import { useComponentVisible } from '../Utils/OutsideClickHook'
-
+import axios from 'axios'
+import Form from './AddEvent'
 
 const localizer = momentLocalizer(moment);
 
@@ -15,13 +16,23 @@ function CalendarDisplayed() {
         setIsComponentVisible
     } = useComponentVisible(false);
 
+    useEffect(() => {
+        axios.get("https://deep-stack.herokuapp.com/api/calendar")
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [])
+
     console.log(new Date(2020, 1, 14, 14))
 
     const state = {
         events: [
             {
                 start: moment().toDate(),
-                end: new Date(2021, 1, 14, 14),
+                end: new Date("Fri Feb 14 2021 14:00:00 GMT-0500 (Eastern Standard Time)"),
                 title: "Some title",
             }
         ]
@@ -36,7 +47,7 @@ function CalendarDisplayed() {
     return (
         <div className="CalendarPage">
 
-
+            <Form />
             <div>
                 <h1 className="EventTitle">Events</h1>
                 <h1>Day:</h1>
