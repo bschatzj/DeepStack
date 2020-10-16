@@ -15,35 +15,31 @@ function CalendarDisplayed() {
         isComponentVisible,
         setIsComponentVisible
     } = useComponentVisible(false);
+    const [events, setEvents] = useState([])
+    const [open, setOpen] = useState({})
 
     useEffect(() => {
         axios.get("https://deep-stack.herokuapp.com/api/calendar")
             .then(res => {
                 console.log(res)
+                setEvents(res.data)
             })
             .catch(err => {
                 console.log(err)
             })
     }, [])
 
-    console.log(new Date(2020, 1, 14, 14))
+    const cleanedEvents = events.map(eventInfo => {
+        return ({
+            start: new Date(eventInfo.Date),
+            end: (moment(eventInfo.Date).add({ ["hours"]: 4 })._d),
+            title: eventInfo.Title,
+            description: eventInfo.Description,
+        }
+        )
+    })
 
-    const state = {
-        events: [
-            {
-                start: moment().toDate(),
-                end: new Date("Fri Feb 14 2021 14:00:00 GMT-0500 (Eastern Standard Time)"),
-                title: "Some title",
-            }
-        ]
-    };
-
-    console.log(state.events)
-
-    const [open, setOpen] = useState({})
-
-
-    console.log(moment().day())
+    console.log(moment("Fri Feb 14 2020 14:00:00 GMT-0500 (Eastern Standard Time)").add({ ["hours"]: 4 }))
     return (
         <div className="CalendarPage">
 
@@ -60,7 +56,7 @@ function CalendarDisplayed() {
                     localizer={localizer}
                     defaultDate={new Date()}
                     defaultView="month"
-                    events={state.events}
+                    events={cleanedEvents}
                     style={{ width: "100%", height: "100%" }}
                     views={["month", "week"]}
                     onSelectEvent={event => {
@@ -69,7 +65,7 @@ function CalendarDisplayed() {
                     }}
                 />
             </div>
-            {isComponentVisible ? <div className="modal"> <div ref={ref} className="infoArea"> <h1 className="X" onClick={() => { setOpen({}); setIsComponentVisible(false) }}>X</h1> <h1>{open.title}</h1> </div></div> : null}
+            {isComponentVisible ? <div className="modal"> <div ref={ref} className="infoArea"> <h1 className="X" onClick={() => { setOpen({}); setIsComponentVisible(false) }}>X</h1> <h1>{open.title}</h1> <h1>{open.description}</h1> </div></div> : null}
         </div>
     );
 }

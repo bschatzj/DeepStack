@@ -12,6 +12,8 @@ export default function AddEvent() {
         Repeat: false,
     })
     const [time, setTime] = useState("")
+    const [value, setValue] = useState("Week")
+    const [number, setNumber] = useState(1)
 
     const handleChange = e => {
         console.log(eventInfo)
@@ -27,9 +29,29 @@ export default function AddEvent() {
             console.log(i)
             const date = moment(new Date(startDate + "T" + time))
             const newDate = (date.add({ [values]: i }));
-            console.log(newDate._d)
+            console.log(newDate)
+            axios.post('https://deep-stack.herokuapp.com/api/calendar/newevent', { "Date": newDate, "Title": eventInfo.Title, "Description": eventInfo.Description })
+                .then(res => { console.log(res) })
+                .catch(err => { console.log(err) })
         }
     }
+
+    function submit() {
+        const date = moment(new Date(eventInfo.Date + "T" + time))._d
+        console.log(date)
+        const infoPosted = { "Date": date, "Title": eventInfo.Title, "Description": eventInfo.Description }
+        console.log(infoPosted)
+        if (eventInfo.Repeat) {
+            repeat(eventInfo.Date, number, value)
+        }
+        else {
+            axios.post('https://deep-stack.herokuapp.com/api/calendar/newevent', infoPosted)
+                .then(res => { console.log(res) })
+                .catch(err => { console.log(err) })
+        }
+    }
+    console.log(value)
+    console.log(number)
     return (
         <div>
             <form>
@@ -45,21 +67,21 @@ export default function AddEvent() {
                 <input name="Repeat" value={eventInfo.Repeat} onChange={handleChecked} type="checkbox" />
                 {eventInfo.Repeat ?
                     <>
-                        <select>
+                        <select value={value} onChange={e => { setValue(e.target.value) }}>
                             <option>Day</option>
                             <option>Week</option>
                             <option>Month</option>
                         </select>
-                        <input type="number" max={100} min={1} />
+                        <label>Number of Repeats</label>
+                        <input onChange={e => { setNumber(e.target.value) }} value={number} type="number" max={100} min={1} />
                     </>
-
                     : null
                 }
 
 
             </form>
 
-            <button onClick={() => { repeat(eventInfo.Date, 6, "days") }} >repeat</button>
+            <button onClick={() => { submit() }} >repeat</button>
         </div>
     )
 }
