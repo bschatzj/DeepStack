@@ -65,7 +65,17 @@ function CalendarDisplayed() {
                     }}
                 />
             </div>
-            {isComponentVisible ? <div className="modal"> <div ref={ref} className="infoArea"> <h1 className="X" onClick={() => { setOpen({}); setIsComponentVisible(false) }}>X</h1> <h1>{open.title}</h1> <h1>{open.description}</h1> </div></div> : null}
+            {isComponentVisible ?
+                <div className="modal">
+                    <div ref={ref} className="infoArea">
+                        <h1 className="X" onClick={() => { setOpen({}); setIsComponentVisible(false) }}>X</h1>
+                        <h1>{open.title}</h1>
+                        <h1>{open.description}</h1>
+                        <h1>{open.start.toTimeString()}</h1>
+                        <h1>{open.start.toDateString()}</h1>
+                    </div>
+                </div>
+                : null}
         </div>
     );
 }
